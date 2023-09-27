@@ -12,6 +12,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var model: LottoViewModel
     private lateinit var txtNum: Array<TextView?>
 
+    private fun setNumbersText() {
+        txtNum.forEachIndexed { index, textView ->
+            textView?.text = model.numbers.value?.get(index).toString()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("Lifecycle!!!", "onCreate")
@@ -29,15 +35,15 @@ class MainActivity : AppCompatActivity() {
 //        txtNum[5] = main.num6
 
         model = ViewModelProvider(this)[LottoViewModel::class.java]
-        txtNum.forEachIndexed { index, textView ->
-            textView?.text = model.numbers[index].toString()
+        setNumbersText()
+
+        model.numbers.observe(this) {
+            setNumbersText()
         }
 
         main.btnGenerate.setOnClickListener {
             model.generate()
-            txtNum.forEachIndexed { index, textView ->
-                textView?.text = model.numbers[index].toString()
-            }
+            //setNumbersText()
 //            main.num1.text = model.numbers[0].toString()
 //            main.num2.text = model.numbers[1].toString()
 //            main.num3.text = model.numbers[2].toString()
