@@ -11,7 +11,7 @@ class LottoViewModel : ViewModel() {
 
     fun generate() {
         _numbers = IntArray(6) {0}
-        var num:Int
+        var num:Int = 0
         for (i in _numbers.indices) {
             do {
                 num = Random.nextInt(1,46)
