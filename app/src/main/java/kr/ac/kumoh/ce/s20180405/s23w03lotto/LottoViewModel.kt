@@ -10,9 +10,9 @@ class LottoViewModel : ViewModel() {
         get() = _numbers
 
     fun generate() {
-        var num = 0
+        _numbers = IntArray(6) {0}
+        var num:Int
         for (i in _numbers.indices) {
-            _numbers[i] = Random.nextInt(1, 46)
             do {
                 num = Random.nextInt(1,46)
             } while (_numbers.contains(num))
